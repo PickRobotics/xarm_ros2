@@ -33,14 +33,14 @@
 
 ## 3. 준비
 
-- ### 3.1 [ROS2] 설치 (https://docs.ros.org/) 
+- ### 3.1 [ROS2 설치](https://docs.ros.org/) 
   - [Humble](https://docs.ros.org/en/ros2_documentation/humble/Installation.html)
 
-- ### 3.2 [Moveit2] 설치(https://moveit.ros.org/install-moveit2/binary/)  
+- ### 3.2 [Moveit2 설치](https://moveit.ros.org/install-moveit2/binary/)  
 
-- ### 3.3 [Gazebo] 설치(https://classic.gazebosim.org/tutorials?tut=install_ubuntu)  
+- ### 3.3 [Gazebo 설치](https://classic.gazebosim.org/tutorials?tut=install_ubuntu)  
 
-- ### 3.4 [gazebo_ros_pkgs] 설치(http://gazebosim.org/tutorials?tut=ros2_installing&cat=connect_ros)  
+- ### 3.4 [gazebo_ros_pkgs 설치](http://gazebosim.org/tutorials?tut=ros2_installing&cat=connect_ros)  
 
 ## 4. 사용 방법
 
