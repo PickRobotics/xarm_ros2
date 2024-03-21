@@ -1,22 +1,15 @@
 # xarm_ros2
 
-For simplified Chinese version: [简体中文版](./ReadMe_cn.md)
-For Korean version: [한국어 버전](./ReadMe_kr.md)
-## 1. Introduction
+## 1. 소개
 
-&ensp;&ensp;&ensp;&ensp;This repository contains simulation models, and corresponding motion planning and controlling demos of the xArm series from UFACTORY. The development and test environment is as follows
-- Ubuntu 20.04 + ROS Foxy
-- Ubuntu 20.04 + ROS Galactic
+&ensp;&ensp;&ensp;&ensp; 이 저장소는 UFACTORY의 xArm 시리즈의 시뮬레이션 모델과 이에 대응하는 모션 플래닝 및 제어 데모를 포함하고 있습니다. 개발 및 테스트 환경은 다음과 같습니다.
 - Ubuntu 22.04 + ROS Humble
-- Ubuntu 22.04 + ROS Rolling
 
-&ensp;&ensp;&ensp;&ensp;Please switch to the corresponding code branch according to different ros2 versions (no corresponding code branch means it has not been tested in this version)
-- Foxy: [foxy](https://github.com/xArm-Developer/xarm_ros2/tree/foxy)
-- Galactic: [galactic](https://github.com/xArm-Developer/xarm_ros2/tree/galactic)
+
+&ensp;&ensp;&ensp;&ensp;사용하는 환경에 따라서 관련 코드로 브랜치하세요.
 - Humble: [humble](https://github.com/xArm-Developer/xarm_ros2/tree/humble)
-- Rolling: [rolling](https://github.com/xArm-Developer/xarm_ros2/tree/rolling)
 
-## 2. Update History    
+## 2. 업데이트 History    
 - moveit dual arm control (under single rviz GUI), each arm can be separately configured（e.g. DOF, add_gripper, etc）
 - add support for Gazebo simulation, can be controlled by moveit.
 - support adding customized tool model.  
@@ -38,24 +31,21 @@ For Korean version: [한국어 버전](./ReadMe_kr.md)
 - (2024-02-27) Added support for Bio Gripper (parameter `add_bio_gripper`, Lite6 is not supported)
 
 
-## 3. Preparation
+## 3. 준비
 
-- ### 3.1 Install [ROS2](https://docs.ros.org/) 
-  - [Foxy](https://docs.ros.org/en/ros2_documentation/foxy/Installation.html)
-  - [Galactic](https://docs.ros.org/en/ros2_documentation/galactic/Installation.html)
+- ### 3.1 [ROS2] 설치 (https://docs.ros.org/) 
   - [Humble](https://docs.ros.org/en/ros2_documentation/humble/Installation.html)
 
-- ### 3.2 Install [Moveit2](https://moveit.ros.org/install-moveit2/binary/)  
+- ### 3.2 [Moveit2] 설치(https://moveit.ros.org/install-moveit2/binary/)  
 
-- ### 3.3 Install [Gazebo](https://classic.gazebosim.org/tutorials?tut=install_ubuntu)  
+- ### 3.3 [Gazebo] 설치(https://classic.gazebosim.org/tutorials?tut=install_ubuntu)  
 
-- ### 3.4 Install [gazebo_ros_pkgs](http://gazebosim.org/tutorials?tut=ros2_installing&cat=connect_ros)  
+- ### 3.4 [gazebo_ros_pkgs] 설치(http://gazebosim.org/tutorials?tut=ros2_installing&cat=connect_ros)  
 
-## 4. How To Use
+## 4. 사용 방법
 
-- ### 4.1 Create a workspace
+- ### 4.1 workspace 생성
     ```bash
-    # Skip this step if you already have a target workspace
     $ cd ~
     $ mkdir -p dev_ws/src
     ```
