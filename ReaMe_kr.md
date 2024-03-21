@@ -92,36 +92,36 @@
 __Reminder 1: 같은 LAN 환경에서 여러 사람이 ROS 2를 사용하는 경우, ROS_DOMAIN_ID__ 설정하기
   - [Humble](https://docs.ros.org/en/ros2_documentation/humble/Concepts/About-Domain-ID.html)
 
-__Reminder 2： Remember to source the environment setup script before running any applications in xarm_ros2__
+__Reminder 2： xarm_ros2 내에 있는 application을 실행하기 전에 환경 설정 script를 source 하기__
 
 ```bash
 $ cd ~/dev_ws/
 $ source install/setup.bash
 ```
-__Reminder 3： All following instructions will base on xArm6，please use proper parameters or filenames for xArm5 or xArm7__
-__Reminder 4: The <hw_ns> described below is replaced with the actual one, the xarm series defaults is xarm, and the rest defaults is ufactory__
+__Reminder 3： 모든 다음 명령은 xArm6를 기반으로 하며, xArm5와 xArm7에 대해서는 적절한 parameters와 파일 이름을 사용해야 합니다__
+__Reminder 4: 아래 <hw_ns>는 실제 값으로 대체되며, xarm 시리즈 기본값은 xarm이며 나머지 기본값은 ufactory입니다.__
 
 
 - ### 5.1 xarm_description
-    This package contains robot description files and 3D models of xArm. Models can be displayed in RViz by the following launch file:
+    이 package는 robot description와 xArm의 3D model을 포함하고 있습니다. 모델은 다음 launch 파일로 RViz내에 나타나게 할 수 있습니다.:
     ```bash
     $ cd ~/dev_ws/
     # set 'add_gripper=true' to attach xArm gripper model
     # set 'add_vacuum_gripper=true' to attach xArm vacuum gripper model
-    # Notice：Only one end_effector can be attached (set to 'true').
+    # 주의：한개의 end_effector만 부착한 경우('true'로 설정).
     $ ros2 launch xarm_description xarm6_rviz_display.launch.py [add_gripper:=true] [add_vacuum_gripper:=true]
     ```
 
 - ### 5.2 xarm_msgs  
-    This package contains all interface definitions for xarm_ros2, please check the instructions in the files before using them. [README](./xarm_msgs/ReadMe.md)
+    이 package는 xarm_ros2에 대한 모든 interface 정의를 포함하며, 이를 사용하기 전에 파일 내에 있는 명령들을 확인하세요. [README](./xarm_msgs/ReadMe.md)
 
 - ### 5.3 xarm_sdk
-    This package serves as a submodule of this project，the corresponding git repository is: [xArm-CPLUS-SDK](https://github.com/xArm-Developer/xArm-CPLUS-SDK.git), for interfacing with real xArms, please refer to the documentation in "xArm-CPLUS-SDK" if interested.
+    이 package는 이 프로젝트의 submodule로 제공되며, 관련 git 저장소는 [xArm-CPLUS-SDK](https://github.com/xArm-Developer/xArm-CPLUS-SDK) 이다. 실제 xArms과 인터페이스를 위해서, "xArm-CPLUS-SDK" 내에 있는 문서를 참고한다.
 
 - ### 5.4 xarm_api
-    This package is a ros wrapper of "xarm_sdk"，functions are implemented as ros service or ros topic，communications with real xArm in "xarm_ros2" are based on the services and topics provided in this part. All the services and topics are under <hw_ns>/ namespace，e.g. full name for "joint_states" is actually "<hw_ns>/joint_states".  
+    이 package는 "xarm_sdk"의 ros wrapper이며 함수들은 ros service나 ros topic으로 구현됩니다. "xarm_ros2" 내에 실제 xArm과 통신은 이 파트에서 제공되는 services와 topics을 기반으로 이뤄집니다. 모든 services와 topics은 <hw_ns>/ namespace 아래에 있습니다.(예 : "joint_states"에 대한 전체 이름은 "<hw_ns>/joint_states" 입니다.)
     
-    - __services__: the name of provided services are the same with the corresponding function in SDK, however, whether to activate the service is up to the configuration under the "services" domain in ```xarm_api/config/xarm_params.yaml``` and ```xarm_api/config/xarm_user_params.yaml```. The defined service can only be activated at initialization if that service is configured to ```true```. If you need to customize the parameters, please create a file ```xarm_api/config/xarm_user_params.yaml``` to modify, the format, refer to ```xarm_api/config/xarm_params.yaml```.
+    - __services__: 제공하는 service의 이름은 SDK에 있는 관련 이름과 동일합니다. 하지만 service를 활성화시키는 것은 "services" 도메인 아래에 있는 설정 파일인 ```xarm_api/config/xarm_params.yaml``` 과 ```xarm_api/config/xarm_user_params.yaml```을 따릅니다. 정의한 service는 해당 service가 ```true```로 설정되어 있는 경우에만 초기화 시점에 활성화됩니다. 만약 parameters를 커스텀해야 하는 경우, ```xarm_api/config/xarm_user_params.yaml``` 파일을 생성하여 수정하며 ```xarm_api/config/xarm_params.yaml```을 참고하세요.
         ```
         services:
             motion_enable: true
@@ -143,7 +143,7 @@ __Reminder 4: The <hw_ns> described below is replaced with the actual one, the x
 
         __uf_ftsensor_ext_states__: is of type __geometry_msgs::msg::WrenchStamped__  
 
-        __Note:__: some of the topics are only available when specific __report_type__ is set at launch stage. Refer [here](https://github.com/xArm-Developer/xarm_ros#report_type-argument).  
+        __Note:__: topics 중에 일부는 __report_type__ 이 launch 단계에서 설정되어 있는 경우에만 유효합니다. 참고 [here](https://github.com/xArm-Developer/xarm_ros#report_type-argument).  
 
     
     - __Launch and test (xArm)__:  
@@ -221,27 +221,27 @@ __Reminder 4: The <hw_ns> described below is replaced with the actual one, the x
         $ ros2 service call /ufactory/set_servo_angle xarm_msgs/srv/MoveJoint "{angles: [-0.58, 0, 0, 0, 0, 0], speed: 0.35, acc: 10, mvtime: 0}"
         ```
 
-    Note: please study the meanings of [Mode](https://github.com/xArm-Developer/xarm_ros#6-mode-change), State and available motion instructions before testing on the real robot. Please note **the services provided by xArm series and Lite 6 have different namespaces**.  
+    Note: 실제 robot에서 테스트하기 전에 [Mode](https://github.com/xArm-Developer/xarm_ros#6-mode-change), state와 motion 명령을 공부하세요. Please note **xArm 시리즈와 Lite 6에서 제공하는 services는 다음 namespaces를 가지고 있습니다**.  
 
 - ### 5.5 xarm_controller
-    This package defines the hardware interface for real xArm control under ros2.  
+    이 package는 ros2 기반 실제 xArm control에 대한 하드웨어 인터페이스를 정의합니다.  
 
     ```bash
     $ cd ~/dev_ws/
-    # For xArm(xarm6 as example): set 'add_gripper=true' to attach xArm gripper model
+    # For xArm(xarm6 as example): xArm gripper model을 부착하기 위해서 'add_gripper=true'로 설정
     $ ros2 launch xarm_controller xarm6_control_rviz_display.launch.py robot_ip:=192.168.1.117 [add_gripper:=true]
 
-    # For lite6: set 'add_gripper=true' to attach Lite6 gripper model
+    # For lite6: Lite6 gripper 모델에 대해서 'add_gripper=true'로 설정
     $ ros2 launch xarm_controller lite6_control_rviz_display.launch.py robot_ip:=192.168.1.161 [add_gripper:=true]
     
-    # For UFACTORY850: set 'add_gripper=true' to attach xarm gripper model
+    # For UFACTORY850: xarm gripper model을 부착하기 위해서 'add_gripper=true'로 설정
     $ ros2 launch xarm_controller uf850_control_rviz_display.launch.py robot_ip:=192.168.1.181 [add_gripper:=true]
     ```
 
 - ### 5.6 xarm_moveit_config
-    This package provides abilities for controlling xArm/Lite6 (simulated or real arm) by moveit.
+    이 package는 moveit에서 xArm/Lite6를 제어하기 위한 기능을 제공합니다.
 
-    - 【simulated】Launch moveit, controlling robot in rviz.  
+    - 【simulated】moveit 실행, rviz에서 robot 제어하기.  
 
         ```bash
         $ cd ~/dev_ws/
@@ -269,7 +269,7 @@ __Reminder 4: The <hw_ns> described below is replaced with the actual one, the x
         $ ros2 launch xarm_moveit_config uf850_moveit_realmove.launch.py robot_ip:=192.168.1.181 [add_gripper:=true]
         ```
     
-    - 【Dual simulated】Launch single moveit process, and controlling two xArms in one rviz.  
+    - 【Dual simulated】하나의 moveit process를 실행하고 하나의 rviz내에서 2개 xArms을 제어하기.  
 
         ```bash
         $ cd ~/dev_ws/
@@ -289,7 +289,7 @@ __Reminder 4: The <hw_ns> described below is replaced with the actual one, the x
         $ ros2 launch xarm_moveit_config dual_uf850_moveit_fake.launch.py [add_gripper:=true]
         ```
     
-    - 【Dual real arm】Launch single moveit process, and controlling two xArms in one rviz.  
+    - 【Dual real arm】하나의 moveit process를 실행하고, 하나의 rviz내에서 2개 xArms을 제어하기.
 
         ```bash
         $ cd ~/dev_ws/
@@ -312,7 +312,7 @@ __Reminder 4: The <hw_ns> described below is replaced with the actual one, the x
         ```
 
 - ### 5.7 xarm_planner
-    This package provides functions for controlling xArm (simulated or real arm) through moveit API  
+    이 package는 moveit API를 통해 xArm(시뮬레이션 혹은 실제 arm)을 제어하기 위한 함수를 제공한다.  
 
     ```bash
     $ cd ~/dev_ws/
@@ -331,7 +331,7 @@ __Reminder 4: The <hw_ns> described below is replaced with the actual one, the x
     # 【real UFACTORY850】launch xarm_planner_node
     $ ros2 launch xarm_planner uf850_planner_realmove.launch.py robot_ip:=192.168.1.181 [add_gripper:=true]
 
-    # In another terminal, run test program (control through API, specify 'robot_type' as 'xarm' or 'lite' or 'uf850')
+    # 다른 터미널에서 테스트 프로그램을 실행 (control through API, specify 'robot_type' as 'xarm' or 'lite' or 'uf850')
     $ ros2 launch xarm_planner test_xarm_planner_api_joint.launch.py dof:=6 robot_type:=<xarm | lite | uf850>
     $ ros2 launch xarm_planner test_xarm_planner_api_pose.launch.py dof:=6 robot_type:=<xarm | lite | uf850>
     ```
@@ -369,7 +369,7 @@ __Reminder 4: The <hw_ns> described below is replaced with the actual one, the x
         $ ros2 launch xarm_gazebo uf850_beside_table_gazebo.launch.py
         ```
 
-    - Simulation with moveit+gazebo (xArm controlled by moveit).
+    - moveit+gazebo로 시뮬레이션 (xArm controlled by moveit).
         ```bash
         $ cd ~/dev_ws/
         # For xArm (xarm6 here):
@@ -382,15 +382,15 @@ __Reminder 4: The <hw_ns> described below is replaced with the actual one, the x
         $ ros2 launch xarm_moveit_config uf850_moveit_gazebo.launch.py
         ```
 - ### 5.9 xarm_moveit_servo
-    This package serves as a demo for jogging xArm with devices such as joystick, through [moveit_servo](http://moveit2_tutorials.picknik.ai/doc/realtime_servo/realtime_servo_tutorial.html). 
-    - Controlling with __XBOX360__ joystick:
-        - left stick for X and Y direction.  
-        - right stick for ROLL and PITCH adjustment.  
-        - left and right trigger (LT/RT) for Z direction.  
-        - left and right bumper (LB/RB) for YAW adjustment.  
-        - D-PAD for controlling joint1 and joint2.  
-        - buttons X and B for controlling last joint.  
-        - buttons Y and A for controlling second last joint.  
+    이 package는 joystick으로 xArm을 조정하는 데모를 제공한다.  [moveit_servo](http://moveit2_tutorials.picknik.ai/doc/realtime_servo/realtime_servo_tutorial.html). 
+    -  __XBOX360__ joystick:
+        - 왼쪽 스틱 :  X 와 Y 방향  
+        - 오른쪽 스틱 : ROLL 과 PITCH 조정  
+        - 왼쪽과 오른쪽 trigger (LT/RT) : z 방향 
+        - 왼쪽과 오른쪽 bumper (LB/RB) : Yaw 조정 
+        - D-PAD : joint1 과 joint2 제어
+        - 버튼 X 와 B : 마지막 joint 제어 
+        - 버튼 Y 와 A : 2번째 마지막 joint 제어  
 
         ```bash
         $ cd ~/dev_ws/
@@ -435,14 +435,14 @@ __Reminder 4: The <hw_ns> described below is replaced with the actual one, the x
         $ ros2 launch xarm_moveit_servo uf850_moveit_servo_realmove.launch.py robot_ip:=192.168.1.181 joystick_type:=3
         ```
     
-    - Controlling with __PC keyboard__:
+    -  __PC keyboard__:
         ```bash
         $ cd ~/dev_ws/
-        # For controlling simulated xArm:
+        # 시뮬레이션 xArm 제어하기:
         $ ros2 launch xarm_moveit_servo xarm_moveit_servo_fake.launch.py dof:=6
-        # Or controlling simulated Lite6:
+        # 혹은 시뮬레이션 Lite6 제어하기:
         $ ros2 launch xarm_moveit_servo lite6_moveit_servo_fake.launch.py
-        # Or controlling simulated UFACTORY850:
+        # 시뮬레이션 UFACTORY850 제어하기:
         $ ros2 launch xarm_moveit_servo uf850_moveit_servo_fake.launch.py
 
         # For controlling real xArm: (use xArm 5 as example)
@@ -457,26 +457,26 @@ __Reminder 4: The <hw_ns> described below is replaced with the actual one, the x
         ```
         Please note that Moveit Servo may consider the home position as singularity point, then try with joint motion first.  
 
-## 6. Instruction on major launch arguments
+## 6. 중요 launch 인자
 - __robot_ip__,
-    IP address of xArm, needed when controlling real hardware.
+    xArm의 IP 주소. 실제 HW 제시어 필요.
 - __report_type__, default: normal. 
-    Data report type, supported types are: normal/rich/dev, 
-    different types will report with different data contents and frequency.
+    Data report type, 지원하는 types : normal/rich/dev, 
+    각 type 마다 다른 data contents와 frequency를 가진다..
 - __dof__, default: 7. 
-    Degree of freedom (DOF) of robot arm，no need to specify explicitly unless necessary.
-    For dual arm launch files(with ```dual_``` prefix), DOF can be specified through:
+    robot arm의 DOF. 별도로 지정할 필요는 없음.
+    dual arm launch 파일(```dual_``` prefix를 가짐)에 대해서 DOF는 다음을 통해서 지정한다.:
     - __dof_1__
     - __dof_2__
 - __velocity_control__, default: false. 
-    Whether to control with velocity interface. (Otherwise, use position interface)
+    velocity 인터페이스로 제어 여부 (반대로, position 인터페이스 사용)
 - __add_realsense_d435i__, default: false.  
-    Whether to load the realsense D435i camera model at the end.
-    For dual arm launch files(with ```dual_``` prefix), it can be specified through:
+    realsense D435i 카메라 모델 로드 여부.
+    dual arm launch 파일( ```dual_``` prefix를 가짐)에 대해서 다음을 통해 지정한다.:
     - __add_realsense_d435i_1__
     - __add_realsense_d435i_2__
 - __add_gripper__, default: false. 
-    Whether to include UFACTORY gripper in the model，it has higher priority than the argument ```add_vacuum_gripper```.
+    model 내부에 UFACTORY gripper를 포함여부. ```add_vacuum_gripper``` 인자보다 더 높은 우선순위를 가진다.
     For dual arm launch files(with ```dual_``` prefix), it can be specified through:
     - __add_gripper_1__
     - __add_gripper_2__
@@ -545,14 +545,14 @@ __Reminder 4: The <hw_ns> described below is replaced with the actual one, the x
     - __geometry_mesh_tcp_xyz_2__
     - __geometry_mesh_tcp_rpy_1__
     - __geometry_mesh_tcp_rpy_2__
-- __kinematics_suffix__: Specify joint Kinematics parameter file suffix
-    - Generation of Kinematics parameter file: 
+- __kinematics_suffix__: joint Kinematics 파라미터 파일 suffix를 지정
+    - Kinematics 파리미터 파일 생성: 
       ```bash
       cd src/xarm_ros/xarm_description/config/kinematics
       python gen_kinematics_params.py {robot_ip} {kinematics_suffix}
 
       # Note
-      # 1. robot_ip represents the IP of the robot arm. You need to connect to the robot arm to obtain the actual parameters.
+      # 1. robot_ip 는 robot arm의 IP 주소. 실제 파라미터를 얻으려면 robot arm에 연결해야한다.
       # 2. kinematics_suffix represents the suffix of the generated parameter file. If successful, the configuration file will be generated in the xarm_description/config/kinematics/user directory. If kinematics_suffix is AAA, then the corresponding file name is as follows
       #   xarm5: xarm_description/config/kinematics/user/xarm5_kinematics_AAA.yaml
       #   xarm6: xarm_description/config/kinematics/user/xarm6_kinematics_AAA.yaml
@@ -560,5 +560,5 @@ __Reminder 4: The <hw_ns> described below is replaced with the actual one, the x
       #   lite6: xarm_description/config/kinematics/user/lite6_kinematics_AAA.yaml
       #   uf850: xarm_description/config/kinematics/user/uf850_kinematics_AAA.yaml
       ```
-    - Use of Kinematics parameter file: Specify this parameter when starting the launch file
+    - Kinematics parameter 파일 사용: launch 파일을 시작할때 이 parameter를 지정
       - Note that before specifying this parameter, make sure that the corresponding configuration file exists. If it does not exist, you need to connect the robot arm through a script to generate it.
