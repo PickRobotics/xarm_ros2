@@ -50,7 +50,7 @@
     $ mkdir -p dev_ws/src
     ```
 
-- ### 4.2 Obtain source code of "xarm_ros2" repository
+- ### 4.2 "xarm_ros2" 저장소에서 소스코드 가져오기
     ```bash
     # Remember to source ros2 environment settings first
     $ cd ~/dev_ws/src
@@ -59,7 +59,7 @@
     $ git clone https://github.com/xArm-Developer/xarm_ros2.git --recursive -b $ROS_DISTRO
     ```
 
-- ### 4.3 Update "xarm_ros2" repository 
+- ### 4.3 "xarm_ros2" 저장소 업데이트
     ```bash
     $ cd ~/dev_ws/src/xarm_ros2
     $ git pull
@@ -67,7 +67,7 @@
     $ git submodule update --init --remote
     ```
 
-- ### 4.4 Install dependencies
+- ### 4.4 의존성 설치
     ```bash
     # Remember to source ros2 environment settings first
     $ cd ~/dev_ws/src/
@@ -75,7 +75,7 @@
     $ rosdep install --from-paths . --ignore-src --rosdistro $ROS_DISTRO -y
     ```
 
-- ### 4.5 Build xarm_ros2
+- ### 4.5 xarm_ros2 빌드하기
     ```bash
     # Remember to source ros2 and moveit2 environment settings first
     $ cd ~/dev_ws/
@@ -87,11 +87,9 @@
     ```
 
 
-## 5. Package Introduction
+## 5. Package 소개
 
-__Reminder 1: If there are multiple people using ros2 in the current LAN, in order to avoid mutual interference, please set ROS_DOMAIN_ID__
-  - [Foxy](https://docs.ros.org/en/ros2_documentation/foxy/Concepts/About-Domain-ID.html)
-  - [Galactic](https://docs.ros.org/en/ros2_documentation/galactic/Concepts/About-Domain-ID.html)
+__Reminder 1: 같은 LAN 환경에서 여러 사람이 ROS 2를 사용하는 경우, ROS_DOMAIN_ID__ 설정하기
   - [Humble](https://docs.ros.org/en/ros2_documentation/humble/Concepts/About-Domain-ID.html)
 
 __Reminder 2： Remember to source the environment setup script before running any applications in xarm_ros2__
@@ -353,12 +351,12 @@ __Reminder 4: The <hw_ns> described below is replaced with the actual one, the x
 
 
 - ### 5.8 xarm_gazebo
-    This package is for supporting xArm simulation with Gazobo.  
+    이 package는 Gazebo xArm 시뮬레이션을 지원한다.
     ***Notice:***  
-    (1) Installation of [gazebo_ros2_control](https://github.com/ros-simulation/gazebo_ros2_control.git) from source may be needed, as well as setting up environment variables of gazebo_ros2_control.  
+    (1) [gazebo_ros2_control](https://github.com/ros-simulation/gazebo_ros2_control.git) 를 소스에서 설치 및 gazebo_ros2_control의 환경 변수를 설정
     (2) [minic_joint_plugin](https://github.com/roboticsgroup/roboticsgroup_upatras_gazebo_plugins) was developed for ROS1, we have modified a version for ROS2 compatibility and it is already integrated in this package for xArm Gripper simulation.  
     
-    - Testing xarm on gazebo independently:
+    - gazebo에서 xarm을 독립적으로 테스팅:
         ```bash
         $ cd ~/dev_ws/
         # For xArm (xarm6 here):
